@@ -15,7 +15,6 @@ jobs:
       - name: Build API
         run: |
           echo ${GITHUB_REF}
-          echo ${GHE_TOKEN}
           echo ${GITHUB_WORKSPACE}
           echo ${GITHUB_REF#refs/tags/}
           echo ${{ steps.tag_name.outputs.tag }}
@@ -25,7 +24,7 @@ jobs:
             -X POST \
             -H "Content-Type: application/json" \
             -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token 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" \
+            -H "Authorization: token ${{ secrets.GHE_TOKEN }}" \
             https://api.github.com/repos/tonythomasm/test-wf-dispatch/actions/workflows/workflow_1.yaml/dispatches \
             -d '{"ref":"release-2021.06.02",
               "inputs": {

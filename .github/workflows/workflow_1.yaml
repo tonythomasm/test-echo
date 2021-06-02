@@ -1,0 +1,32 @@
+name: Deploy
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Run API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build API
+        run: |
+          echo ${GITHUB_REF}
+          echo ${GITHUB_WORKSPACE}
+          echo ${GITHUB_REF#refs/tags/}
+          echo ${{ steps.tag_name.outputs.tag }}
+          echo ${{ github.run_number }}
+          echo ${GITHUB_REPOSITORY}
+          curl -i \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token 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" \
+            https://api.github.com/repos/tonythomasm/test-wf-dispatch/actions/workflows/workflow_1.yaml/dispatches \
+            -d '{"ref":"release-2021.06.02",
+              "inputs": {
+              "message": "triggered from local curl command"
+            }}'

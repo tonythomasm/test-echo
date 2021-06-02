@@ -15,6 +15,7 @@ jobs:
       - name: Build API
         run: |
           echo ${GITHUB_REF}
+          echo ${GHE_TOKEN}
           echo ${GITHUB_WORKSPACE}
           echo ${GITHUB_REF#refs/tags/}
           echo ${{ steps.tag_name.outputs.tag }}

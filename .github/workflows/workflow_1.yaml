@@ -27,7 +27,7 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.GHE_TOKEN }}" \
             https://api.github.com/repos/tonythomasm/test-wf-dispatch/actions/workflows/workflow_1.yaml/dispatches \
-            -d '{"ref":"main",
+            -d '{"ref":"release-2021.06.09",
               "inputs": {
               "message": "Hi, I am Tony"
             }}'
